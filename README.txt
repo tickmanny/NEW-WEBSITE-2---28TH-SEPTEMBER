@@ -1,0 +1,1 @@
+TV Unit Calculator header applied as the canonical header across all pages. FAQ is not in the mobile dropdown. Footer/page FAQ content remains intact. Header uses unique lf-header-* classes to avoid collisions with page-specific CSS.
