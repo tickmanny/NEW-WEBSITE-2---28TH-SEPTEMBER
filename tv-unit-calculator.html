@@ -260,9 +260,9 @@
     .rows .l{min-width:0;font-size:12px;color:#41403b}
     .rows .l small{display:block;color:#8a8680;font-size:10px;line-height:1.3;margin-top:2px}
     .rows .a{font-variant-numeric:tabular-nums;white-space:nowrap;font-size:12px;font-weight:700;color:#2d2d2a}
-    .total{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin:16px 0 4px;padding:17px 18px;border-radius:14px;background:#f2eee7;border:1px solid #e6dfd4}
+    .total{display:flex;justify-content:space-between;align-items:baseline;gap:14px;margin:16px 0 4px;padding:22px 20px;border-radius:14px;background:#f2eee7;border:1px solid #e6dfd4}
     .total span{font-family:var(--display);font-weight:600;letter-spacing:-.02em}
-    .total b{font-family:var(--display);font-size:28px;letter-spacing:-.035em;font-variant-numeric:tabular-nums}
+    .total b{font-family:var(--display);font-size:32px;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
     .quote .fine{margin-top:10px}
     .actions{display:grid;gap:9px;margin-top:16px}
     details.qt{margin-top:13px;font-size:12px}
@@ -563,12 +563,11 @@
 
     <aside class="quote" id="quote" aria-labelledby="h-quote">
       <h2 id="h-quote">Your estimate</h2>
-      <ul class="rows" id="rows"></ul>
-      <div class="total"><span>Total</span><b id="total">GH₵ 0</b></div>
+      <div class="total"><span>Estimated total</span><b id="total">GH₵ 0</b></div>
       <p class="fine">Preliminary estimate only. Final pricing is confirmed after design development, material confirmation and site verification.</p>
       <div class="actions">
         <a class="btn primary" id="wa" href="#" target="_blank" rel="noopener">Send on WhatsApp</a>
-        <button class="btn" id="copy" type="button">Copy quote summary</button>
+        <button class="btn" id="copy" type="button">Copy estimate summary</button>
       </div>
       <details class="qt"><summary>Show quote text</summary><textarea id="qtext" readonly></textarea></details>
     </aside>
@@ -711,7 +710,6 @@ function renderQuote(c, issues){
   $('previewSummary').textContent=`${E.toFixed(2)}m W × ${D.toFixed(2)}m H • ${M} base module${M===1?'':'s'}`;
 
   if(issues.length){
-    $('rows').innerHTML='';
     $('total').textContent='—';
     $('barTotal').textContent='—';
     $('qtext').value='Configuration is invalid. Please correct the issues before quoting.';
@@ -719,8 +717,6 @@ function renderQuote(c, issues){
     return;
   }
 
-  const rows=c.breakdown||[];
-  $('rows').innerHTML=rows.map(x=>`<li><div class="l">${x.label}<small>${x.sub||''}</small></div><div class="a">${money(x.amount)}</div></li>`).join('');
   $('total').textContent=money(c.total);
   $('barTotal').textContent=money(c.total);
 
@@ -736,8 +732,6 @@ function renderQuote(c, issues){
     `Wall cladding: ${claddingLabel}`,
     `Backing LED: ${state.backingLed&&state.backing?'Yes':'No'}`,
     `Shelf LED: ${state.shelfLed&&state.shelves?'Yes':'No'}`,
-    '',
-    ...rows.map(x=>`${x.label}: ${money(x.amount)}`),
     '',
     `Estimated total: ${money(c.total)}`,
     '',
@@ -805,7 +799,7 @@ $('shelfLed').addEventListener('change',e=>{state.shelfLed=e.target.checked&&sta
 $('copy').addEventListener('click',async()=>{
   try{await navigator.clipboard.writeText($('qtext').value);$('copy').textContent='Copied';}
   catch(e){$('qtext').select();document.querySelector('details.qt').open=true;$('copy').textContent='Select and copy below';}
-  setTimeout(()=>{$('copy').textContent='Copy quote summary';},2200);
+  setTimeout(()=>{$('copy').textContent='Copy estimate summary';},2200);
 });
 
 // Initial calculation through the private Worker.
