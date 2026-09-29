@@ -1682,10 +1682,7 @@
             </li>
           </ul>`;
 
-        $('rows').innerHTML =
-          materialsRows +
-          hardwareRows +
-          installRows;
+        $('rows').innerHTML = '';
 
         $('total').textContent =
           money(
@@ -1750,16 +1747,6 @@
           `Glass door area: ${q.glassDoorArea.toFixed(2)} m²`,
           `Selected accessories: ${accessorySummary}`,
           '',
-          `MATERIALS: ${money(c.mainBoardCost + c.backPanelCost)}`,
-          `GLASS DOORS: ${money(c.glassDoorCost)}`,
-          `CUTTING: ${money(c.cuttingCost)}`,
-          `EDGE BAND: ${money(c.edgeBandCost)}`,
-          `HARDWARE: ${money(c.totalHardwareCost)}`,
-          `ACCESSORIES: ${money(c.accessoryCost)}`,
-          `LED LIGHTING: ${money(c.ledStripCost)}`,
-          `CONSUMABLES: ${money(c.consumablesCost)}`,
-          `INSTALLATION: ${money(c.labourCost)}`,
-          `TRANSPORT: ${money(c.transportCost)}`,
           `ESTIMATED TOTAL: ${money(c.sellingPrice)}`,
           '',
           'This is a preliminary estimate and will be confirmed after site measurement and final design.'
