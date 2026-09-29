@@ -961,7 +961,7 @@ function refreshExtras(quote){
 }
 
 function applyQuote(rows, total, invalid, errorText=''){
-  $('rows').innerHTML = invalid ? '' : rows.map(x=>`<li><span class="l">${x.l}<small>${x.s}</small></span><span class="a">${fmt(x.a)}</span></li>`).join('');
+  $('rows').innerHTML = '';
   $('total').textContent = invalid ? (errorText || 'Check configuration') : fmt(total);
   $('barTotal').textContent = invalid ? (errorText || 'Check configuration') : fmt(total);
   $('wa').hidden = false;
@@ -1025,8 +1025,6 @@ async function update(){
       `LED: ${S.led?'Yes':'No'}`,
       `Backsplash: ${S.backsplash?'Quartz':'No'}`,
       `Location: ${loc}`,
-      '',
-      ...r.rows.map(x=>`${x.l}: ${fmt(x.a)}`),
       '',
       `Estimated total: ${fmt(r.finalEstimate)}`,
       '',
